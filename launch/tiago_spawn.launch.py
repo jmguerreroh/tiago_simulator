@@ -37,7 +37,7 @@ def generate_launch_description():
     # @TODO: load PID gains? used in gazebo_ros_control fork
     # @TODO: load tiago_pal_hardware_gazebo
 
-    robots_dir = get_package_share_directory('computer_vision')
+    robots_dir = get_package_share_directory('tiago_simulator')
     config = os.path.join(robots_dir, 'config', 'params.yaml')
 
     with open(config, "r") as stream:
@@ -60,22 +60,22 @@ def generate_launch_description():
                         arguments=['-topic', 'robot_description',
                                    '-entity',
                                    LaunchConfiguration('model_name'),
-                                   ' '.join(['-x', str(conf['computer_vision']
+                                   ' '.join(['-x', str(conf['tiago_simulator']
                                                            ['robot_position']
                                                            ['x'])]),
-                                   ' '.join(['-y', str(conf['computer_vision']
+                                   ' '.join(['-y', str(conf['tiago_simulator']
                                                            ['robot_position']
                                                            ['y'])]),
-                                   ' '.join(['-z', str(conf['computer_vision']
+                                   ' '.join(['-z', str(conf['tiago_simulator']
                                                            ['robot_position']
                                                            ['z'])]),
-                                   ' '.join(['-R', str(conf['computer_vision']
+                                   ' '.join(['-R', str(conf['tiago_simulator']
                                                            ['robot_position']
                                                            ['roll'])]),
-                                   ' '.join(['-P', str(conf['computer_vision']
+                                   ' '.join(['-P', str(conf['tiago_simulator']
                                                            ['robot_position']
                                                            ['pitch'])]),
-                                   ' '.join(['-Y', str(conf['computer_vision']
+                                   ' '.join(['-Y', str(conf['tiago_simulator']
                                                            ['robot_position']
                                                            ['yaw'])]),
                                    # LaunchConfiguration('gzpose'),

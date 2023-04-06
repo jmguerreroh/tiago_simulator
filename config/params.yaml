@@ -40,7 +40,7 @@
 # Options:
 # Tiago arm: no-arm - right-arm
 
-computer_vision:
+tiago_simulator:
   world: aws_house
   robot_position:
     x: 0.0

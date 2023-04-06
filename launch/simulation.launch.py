@@ -58,7 +58,7 @@ def get_resource_paths(packages_names):
 
 
 def generate_launch_description():
-    robots_dir = get_package_share_directory('computer_vision')
+    robots_dir = get_package_share_directory('tiago_simulator')
 
     config = os.path.join(robots_dir, 'config', 'params.yaml')
 
@@ -69,13 +69,13 @@ def generate_launch_description():
         except yaml.YAMLError as exc:
             print(exc)
 
-    arm = conf['computer_vision']['tiago_arm']
+    arm = conf['tiago_simulator']['tiago_arm']
     arm_arg = DeclareLaunchArgument(
         'arm', default_value=arm,
         description='Tiago arm'
     )
 
-    world_name = conf['computer_vision']['world']
+    world_name = conf['tiago_simulator']['world']
     world_name_arg = DeclareLaunchArgument(
         'world_name', default_value=world_name,
         description='World name'
@@ -130,7 +130,7 @@ def generate_launch_description():
             )
 
     robot_spawn = include_launch_py_description(
-        'computer_vision', ['launch', 'tiago_spawn.launch.py'])
+        'tiago_simulator', ['launch', 'tiago_spawn.launch.py'])
 
     tiago_bringup = include_launch_py_description(
         'tiago_bringup', ['launch', 'tiago_bringup.launch.py'])
