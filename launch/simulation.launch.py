@@ -130,7 +130,7 @@ def generate_launch_description():
             )
 
     robot_spawn = include_launch_py_description(
-        'tiago_simulator', ['launch', 'tiago_spawn.launch.py'])
+        'tiago_simulator', ['launch', 'dependencies', 'tiago_spawn.launch.py'])
 
     tiago_bringup = include_launch_py_description(
         'tiago_bringup', ['launch', 'tiago_bringup.launch.py'])

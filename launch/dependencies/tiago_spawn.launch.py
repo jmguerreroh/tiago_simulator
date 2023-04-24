@@ -80,6 +80,8 @@ def generate_launch_description():
                                                            ['yaw'])]),
                                    # LaunchConfiguration('gzpose'),
                                    ],
+                        # respawn=True,
+                        # respawn_delay=2.0,
                         output='screen')
 
     # Create the launch description and populate
