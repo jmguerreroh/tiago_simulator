@@ -35,6 +35,10 @@ repositories:
     type: git
     url: https://github.com/pal-robotics/pal_gripper.git
     version: humble-devel
+  ThirdParty/pal_navigation_cfg_public:
+    type: git
+    url: https://github.com/pal-robotics/pal_navigation_cfg_public.git
+    version: humble-devel
   ThirdParty/play_motion2:
     type: git
     url: https://github.com/pal-robotics/play_motion2.git
