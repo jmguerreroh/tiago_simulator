@@ -21,11 +21,15 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_pal.include_utils import include_launch_py_description
 from launch_ros.actions import SetRemap
+from launch.actions import DeclareLaunchArgument
 
 
 def generate_launch_description():
     sim_dir = get_package_share_directory('tiago_simulator')
     config = os.path.join(sim_dir, 'config', 'params.yaml')
+    sim_time_arg = DeclareLaunchArgument(
+      'use_sim_time', default_value='True',
+      description='Yaml file with the info of the motions. ')
 
     with open(config, "r") as stream:
         try:
@@ -49,6 +53,7 @@ def generate_launch_description():
     scan_remap = SetRemap(src='scan', dst='scan_raw')
     ld.add_action(scan_remap)
 
+    ld.add_action(sim_time_arg)
     ld.add_action(nav2)
 
     return ld
