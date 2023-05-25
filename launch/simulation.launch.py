@@ -80,6 +80,11 @@ def generate_launch_description():
         description='Specify if launching MoveIt2'
     )
 
+    model_name = DeclareLaunchArgument(
+        'model_name', default_value='tiago',
+        description='Gazebo model name'
+    )
+
     world_name = conf['tiago_simulator']['world']
     world_name_arg = DeclareLaunchArgument(
         'world_name', default_value=world_name,
@@ -138,16 +143,9 @@ def generate_launch_description():
     #     'tiago_simulator', ['launch', 'dependencies',
     #                           'tiago_spawn.launch.py'])
 
-    tiago_spawn = include_launch_py_description(
-        'tiago_gazebo', ['launch', 'tiago_spawn.launch.py'],
-        launch_arguments={
-            '-x': str(conf['tiago_simulator']['robot_position']['x']),
-            '-y': str(conf['tiago_simulator']['robot_position']['y']),
-            '-z': str(conf['tiago_simulator']['robot_position']['z']),
-            '-R': str(conf['tiago_simulator']['robot_position']['roll']),
-            '-P': str(conf['tiago_simulator']['robot_position']['pitch']),
-            '-Y': str(conf['tiago_simulator']['robot_position']['yaw'])
-            }.items())
+    tiago_state_publisher = include_launch_py_description(
+        'tiago_description',
+        ['launch', 'robot_state_publisher.launch.py'])
 
     tiago_bringup = include_launch_py_description(
         'tiago_bringup', ['launch', 'tiago_bringup.launch.py'])
@@ -160,6 +158,34 @@ def generate_launch_description():
                     executable='tuck_arm.py',
                     emulate_tty=True,
                     output='both')
+
+    robot_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
+                        arguments=['-topic', 'robot_description',
+                                   '-entity', 
+                                   LaunchConfiguration('model_name'),
+                                   ' '.join(['-x', str(conf['tiago_simulator']
+                                                           ['robot_position']
+                                                           ['x'])]),
+                                   ' '.join(['-y', str(conf['tiago_simulator']
+                                                           ['robot_position']
+                                                           ['y'])]),
+                                   ' '.join(['-z', str(conf['tiago_simulator']
+                                                           ['robot_position']
+                                                           ['z'])]),
+                                   ' '.join(['-R', str(conf['tiago_simulator']
+                                                           ['robot_position']
+                                                           ['roll'])]),
+                                   ' '.join(['-P', str(conf['tiago_simulator']
+                                                           ['robot_position']
+                                                           ['pitch'])]),
+                                   ' '.join(['-Y', str(conf['tiago_simulator']
+                                                           ['robot_position']
+                                                           ['yaw'])])
+                                   # LaunchConfiguration('gzpose'),
+                                   ],
+                        # respawn=True,
+                        # respawn_delay=2.0,
+                        output='screen')
 
     # @TODO: review pal_gazebo
     # @TODO: review tiago_spawn
@@ -185,9 +211,11 @@ def generate_launch_description():
     # ld.add_action(SetEnvironmentVariable('GAZEBO_RESOURCE_PATH',
     #                                       tiago_resource_path))
     ld.add_action(world_name_arg)
+    ld.add_action(model_name)
     ld.add_action(gazebo)
     ld.add_action(arm_arg)
-    ld.add_action(tiago_spawn)
+    ld.add_action(tiago_state_publisher)
+    ld.add_action(robot_entity)
     ld.add_action(tiago_bringup)
     ld.add_action(moveit_arg)
     ld.add_action(move_group)
