@@ -58,6 +58,11 @@ If you have a low performance, close the Gazebo's client. Check gzclient process
 kill -9 `pgrep -f gzclient`
 ``` 
 
+Also you can use [Nav2](https://navigation.ros.org/) with the robot in the world selected in `config/params.yaml`:
+```bash
+ros2 launch tiago_simulator navigation.launch.py
+``` 
+
 ## About
 
 This is a project made by [José Miguel Guerrero], Associate Professor at [Universidad Rey Juan Carlos].
