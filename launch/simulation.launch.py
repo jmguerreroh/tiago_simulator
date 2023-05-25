@@ -161,7 +161,7 @@ def generate_launch_description():
 
     robot_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
                         arguments=['-topic', 'robot_description',
-                                   '-entity', 
+                                   '-entity',
                                    LaunchConfiguration('model_name'),
                                    ' '.join(['-x', str(conf['tiago_simulator']
                                                            ['robot_position']
