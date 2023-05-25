@@ -26,7 +26,9 @@ from launch.actions import DeclareLaunchArgument
 
 def generate_launch_description():
     sim_dir = get_package_share_directory('tiago_simulator')
+
     config = os.path.join(sim_dir, 'config', 'params.yaml')
+
     sim_time_arg = DeclareLaunchArgument(
       'use_sim_time', default_value='True',
       description='Yaml file with the info of the motions. ')
