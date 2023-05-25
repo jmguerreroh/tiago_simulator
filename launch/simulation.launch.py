@@ -32,13 +32,13 @@ from launch.substitutions import LaunchConfiguration
 
 
 def get_model_paths(packages_names):
-    model_paths = ""
+    model_paths = ''
     for package_name in packages_names:
-        if model_paths != "":
+        if model_paths != '':
             model_paths += pathsep
 
         package_path = get_package_prefix(package_name)
-        model_path = os.path.join(package_path, "share")
+        model_path = os.path.join(package_path, 'share')
 
         model_paths += model_path
 
@@ -46,9 +46,9 @@ def get_model_paths(packages_names):
 
 
 def get_resource_paths(packages_names):
-    resource_paths = ""
+    resource_paths = ''
     for package_name in packages_names:
-        if resource_paths != "":
+        if resource_paths != '':
             resource_paths += pathsep
 
         package_path = get_package_prefix(package_name)
@@ -75,10 +75,15 @@ def generate_launch_description():
         description='Tiago arm'
     )
 
+    moveit_arg = DeclareLaunchArgument(
+        'moveit', default_value='false',
+        description='Specify if launching MoveIt2'
+    )
+
     world_name = conf['tiago_simulator']['world']
     world_name_arg = DeclareLaunchArgument(
         'world_name', default_value=world_name,
-        description='World name'
+        description="Specify world name, we'll convert to full path"
     )
 
     # Default: Original path for PAL worlds
@@ -129,15 +134,32 @@ def generate_launch_description():
                     'launch'), '/view_bookstore.launch.py']),
             )
 
-    robot_spawn = include_launch_py_description(
-        'tiago_simulator', ['launch', 'dependencies', 'tiago_spawn.launch.py'])
+    # robot_spawn = include_launch_py_description(
+    #     'tiago_simulator', ['launch', 'dependencies',
+    #                           'tiago_spawn.launch.py'])
+
+    tiago_spawn = include_launch_py_description(
+        'tiago_gazebo', ['launch', 'tiago_spawn.launch.py'],
+        launch_arguments={
+            '-x': str(conf['tiago_simulator']['robot_position']['x']),
+            '-y': str(conf['tiago_simulator']['robot_position']['y']),
+            '-z': str(conf['tiago_simulator']['robot_position']['z']),
+            '-R': str(conf['tiago_simulator']['robot_position']['roll']),
+            '-P': str(conf['tiago_simulator']['robot_position']['pitch']),
+            '-Y': str(conf['tiago_simulator']['robot_position']['yaw'])
+            }.items())
 
     tiago_bringup = include_launch_py_description(
         'tiago_bringup', ['launch', 'tiago_bringup.launch.py'])
 
-    # tuck_arm = Node(package='tiago_gazebo',
-    #                 executable='tuck_arm.py',
-    #                 output='both')
+    move_group = include_launch_py_description(
+        'tiago_moveit_config', ['launch', 'move_group.launch.py'],
+        condition=IfCondition(LaunchConfiguration('moveit')))
+
+    tuck_arm = Node(package='tiago_gazebo',
+                    executable='tuck_arm.py',
+                    emulate_tty=True,
+                    output='both')
 
     # @TODO: review pal_gazebo
     # @TODO: review tiago_spawn
@@ -155,19 +177,6 @@ def generate_launch_description():
     if 'GAZEBO_RESOURCE_PATH' in environ:
         resource_path += pathsep + environ['GAZEBO_RESOURCE_PATH']
 
-    moveit_arg = DeclareLaunchArgument(
-        'moveit', default_value='false',
-        description='Specify if launching MoveIt2'
-    )
-    move_group = include_launch_py_description(
-        'tiago_moveit_config', ['launch', 'move_group.launch.py'],
-        condition=IfCondition(LaunchConfiguration('moveit')))
-
-    tuck_arm = Node(package='tiago_gazebo',
-                    executable='tuck_arm.py',
-                    emulate_tty=True,
-                    output='both')
-
     # Create the launch description and populate
     ld = LaunchDescription()
 
@@ -177,9 +186,8 @@ def generate_launch_description():
     #                                       tiago_resource_path))
     ld.add_action(world_name_arg)
     ld.add_action(gazebo)
-
     ld.add_action(arm_arg)
-    ld.add_action(robot_spawn)
+    ld.add_action(tiago_spawn)
     ld.add_action(tiago_bringup)
     ld.add_action(moveit_arg)
     ld.add_action(move_group)
