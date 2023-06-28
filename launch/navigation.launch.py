@@ -1,4 +1,4 @@
-# Copyright (c) 2021 PAL Robotics S.L.
+# Copyright (c) 2023 José Miguel Guerrero Hernández
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,8 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-# Modified by José Miguel Guerrero Hernández
 
 import os
 import yaml
@@ -31,7 +29,11 @@ def generate_launch_description():
 
     sim_time_arg = DeclareLaunchArgument(
       'use_sim_time', default_value='True',
-      description='Yaml file with the info of the motions. ')
+      description='Use simulation (Gazebo) clock if true')
+
+    rviz_arg = DeclareLaunchArgument(
+      'rviz', default_value='True',
+      description='Run RViz2 if true')
 
     with open(config, "r") as stream:
         try:
@@ -55,6 +57,7 @@ def generate_launch_description():
     scan_remap = SetRemap(src='scan', dst='scan_raw')
     ld.add_action(scan_remap)
 
+    ld.add_action(rviz_arg)
     ld.add_action(sim_time_arg)
     ld.add_action(nav2)
 
