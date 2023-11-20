@@ -6,7 +6,7 @@
 
 This package allows running different Gazebo worlds, including the [AWS Robomaker](https://github.com/aws-robotics) worlds, using the Tiago robot from [PAL Robotics](https://github.com/pal-robotics)
 
-**Recommended: use [Eclipse Cyclone DDS](https://docs.ros.org/en/foxy/Installation/DDS-Implementations/Working-with-Eclipse-CycloneDDS.html). 
+** In the event of communication difficulties, please consider switching the DDS. Recommended: use [Eclipse Cyclone DDS](https://docs.ros.org/en/foxy/Installation/DDS-Implementations/Working-with-Eclipse-CycloneDDS.html). 
 You can do this by installing it with `sudo apt install ros-humble-rmw-cyclonedds-cpp` and setting the `RMW_IMPLEMENTATION` environment variable: `export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp`. Add it to your `.bashrc`**
 
 # Installation 
@@ -29,19 +29,19 @@ sudo apt install python3-vcstool python3-pip python3-rosdep python3-colcon-commo
 cd <ros2-workspace>/src/
 vcs import < tiago_simulator/thirdparty.repos
 ```
-*Please make sure that this last command has not failed. If this happens, run it again.*
+*Please make sure that this last command has not failed. If this happens, rerun it.*
 
 # Building project
 
 ```bash
+rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install --cmake-args -DBUILD_TESTING=OFF
 ``` 
 
 # Setup Environment
 
-You can include this into your `.bashrc` file
+Add it to your `.bashrc` file
 ```bash
-export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 source /usr/share/gazebo/setup.bash
 source <ros2-workspace>/install/setup.bash
 ``` 
@@ -53,19 +53,24 @@ ros2 launch tiago_simulator simulation.launch.py
 
 To change the Gazebo world or the initial position/rotation of the Tiago robot, you can modify the `config/params.yaml` file.
 
-If you have a low performance, close the Gazebo's client. Check gzclient process, and kill it:
+If you have a low performance and you have installed the NVIDIA driver, you can use your GPU by selecting the NVIDIA PRIME profile:
 ```bash
-kill -9 `pgrep -f gzclient`
+sudo prime-select nvidia
+```
+
+Otherwise, you can close the Gazebo client:
+```bash
+pkill -f gzclient
 ``` 
 
-Also you can use [Nav2](https://navigation.ros.org/) with the robot in the world selected in `config/params.yaml`:
+Also, you can use [Nav2](https://navigation.ros.org/) with the robot in the world selected in `config/params.yaml`:
 ```bash
 ros2 launch tiago_simulator navigation.launch.py
 ``` 
 
 ## About
 
-This is a project made by [José Miguel Guerrero], Associate Professor at [Universidad Rey Juan Carlos].
+This project was made by [José Miguel Guerrero], Associate Professor at [Universidad Rey Juan Carlos].
 Copyright &copy; 2022.
 
 [![Twitter](https://img.shields.io/badge/follow-@jm__guerrero-green.svg)](https://twitter.com/jm__guerrero)
