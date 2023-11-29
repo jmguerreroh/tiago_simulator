@@ -34,6 +34,7 @@ vcs import < tiago_simulator/thirdparty.repos
 # Building project
 
 ```bash
+cd <ros2-workspace>
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install --cmake-args -DBUILD_TESTING=OFF
 ``` 
