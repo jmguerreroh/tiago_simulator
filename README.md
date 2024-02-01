@@ -73,7 +73,7 @@ ros2 launch tiago_simulator navigation.launch.py
 
 This project was made by [José Miguel Guerrero], Associate Professor at [Universidad Rey Juan Carlos].
 
-Copyright &copy; 2023.
+Copyright &copy; 2024.
 
 [![Twitter](https://img.shields.io/badge/follow-@jm__guerrero-green.svg)](https://twitter.com/jm__guerrero)
 
