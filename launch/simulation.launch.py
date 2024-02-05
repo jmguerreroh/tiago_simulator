@@ -59,6 +59,10 @@ def generate_launch_description():
 
     config = os.path.join(robots_dir, 'config', 'params.yaml')
 
+    sim_time_arg = DeclareLaunchArgument(
+      'use_sim_time', default_value='True',
+      description='Use simulation (Gazebo) clock if true')
+
     with open(config, "r") as stream:
         try:
             conf = (yaml.safe_load(stream))
@@ -207,6 +211,7 @@ def generate_launch_description():
     # Using this prevents shared library from being found
     # ld.add_action(SetEnvironmentVariable('GAZEBO_RESOURCE_PATH',
     #                                       tiago_resource_path))
+    ld.add_action(sim_time_arg)
     ld.add_action(world_name_arg)
     ld.add_action(model_name)
     ld.add_action(gazebo)
