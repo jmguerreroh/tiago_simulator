@@ -11,7 +11,7 @@ You can do this by installing it with `sudo apt install ros-humble-rmw-cyclonedd
 
 # Installation 
 
-You need to have previously installed ROS2. Please follow this [guide](https://docs.ros.org/en/humble/Installation.html) if you don't have it.
+You need to have previously installed ROS 2. Please follow this [guide](https://docs.ros.org/en/humble/Installation.html) if you don't have it.
 ```bash
 source /opt/ros/humble/setup.bash
 ```
