@@ -47,7 +47,7 @@ source /usr/share/gazebo/setup.bash
 source <ros2-workspace>/install/setup.bash
 ``` 
 
-# Run Gazebo & Tiago in ROS2
+# Run Gazebo & Tiago in ROS 2
 ```bash
 ros2 launch tiago_simulator simulation.launch.py
 ``` 
