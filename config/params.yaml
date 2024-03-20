@@ -38,7 +38,7 @@
 # aws_racetrack - x: 2.75 - y: -15.0  - z: 0.2 - roll: 0.0 - pitch: 0.0 - yaw:  0.0
 
 # Options:
-# Tiago arm: no-arm - right-arm
+# Tiago arm: no-arm - tiago-arm
 
 tiago_simulator:
   world: aws_house

@@ -78,13 +78,8 @@ def generate_launch_description():
     )
 
     moveit_arg = DeclareLaunchArgument(
-        'moveit', default_value='false',
-        description='Specify if launching MoveIt2'
-    )
-
-    model_name = DeclareLaunchArgument(
-        'model_name', default_value='tiago',
-        description='Gazebo model name'
+        'moveit', default_value='True',
+        description='Specify if launching MoveIt 2'
     )
 
     world_name = conf['tiago_simulator']['world']
@@ -141,10 +136,6 @@ def generate_launch_description():
                     'launch'), '/view_bookstore.launch.py']),
             )
 
-    # robot_spawn = include_launch_py_description(
-    #     'tiago_simulator', ['launch', 'dependencies',
-    #                           'tiago_spawn.launch.py'])
-
     tiago_state_publisher = include_launch_py_description(
         'tiago_description',
         ['launch', 'robot_state_publisher.launch.py'])
@@ -163,8 +154,7 @@ def generate_launch_description():
 
     robot_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
                         arguments=['-topic', 'robot_description',
-                                   '-entity',
-                                   LaunchConfiguration('model_name'),
+                                   '-entity', 'tiago',
                                    ' '.join(['-x', str(conf['tiago_simulator']
                                                            ['robot_position']
                                                            ['x'])]),
@@ -195,7 +185,8 @@ def generate_launch_description():
     # @TODO: pal_pcl_points_throttle_and_filter
 
     packages = ['tiago_description', 'pmb2_description',
-                'hey5_description', 'pal_gripper_description']
+                'hey5_description', 'pal_gripper_description', 
+                'pal_robotiq_description' ]
     model_path = get_model_paths(packages)
     resource_path = get_resource_paths(packages)
 
@@ -214,12 +205,13 @@ def generate_launch_description():
     #                                       tiago_resource_path))
     ld.add_action(sim_time_arg)
     ld.add_action(world_name_arg)
-    ld.add_action(model_name)
-    ld.add_action(gazebo)
     ld.add_action(arm_arg)
+
+    ld.add_action(gazebo)
     ld.add_action(tiago_state_publisher)
     ld.add_action(robot_entity)
     ld.add_action(tiago_bringup)
+
     ld.add_action(moveit_arg)
     ld.add_action(move_group)
     ld.add_action(tuck_arm)

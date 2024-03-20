@@ -17,23 +17,15 @@ import yaml
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch_pal.include_utils import include_launch_py_description
-from launch_ros.actions import SetRemap
-from launch.actions import DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 
 def generate_launch_description():
     sim_dir = get_package_share_directory('tiago_simulator')
-
+    tiago_2dnav_dir = get_package_share_directory('tiago_2dnav')
+    nav2_bringup_dir = get_package_share_directory("nav2_bringup")
     config = os.path.join(sim_dir, 'config', 'params.yaml')
-
-    sim_time_arg = DeclareLaunchArgument(
-      'use_sim_time', default_value='True',
-      description='Use simulation (Gazebo) clock if true')
-
-    rviz_arg = DeclareLaunchArgument(
-      'rviz', default_value='True',
-      description='Run RViz2 if true')
 
     with open(config, "r") as stream:
         try:
@@ -43,22 +35,34 @@ def generate_launch_description():
             print(exc)
 
     world_name = conf['tiago_simulator']['world']
-    nav2 = include_launch_py_description(
-        'tiago_2dnav', ['launch', 'tiago_nav_bringup.launch.py'],
+
+    nav2_bringup_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(nav2_bringup_dir, "launch", "bringup_launch.py")
+        ),
         launch_arguments={
-          'map': os.path.join(sim_dir, 'maps', world_name + '.yaml'),
-        }.items()
+            "params_file": os.path.join(
+                tiago_2dnav_dir, "params", "tiago_nav_public_sim.yaml"
+            ),
+            "map": os.path.join(sim_dir, 'maps', world_name + '.yaml'),
+            "use_sim_time": "True",
+        }.items(),
     )
 
-    # Create the launch description and populate
+    rviz_bringup_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(nav2_bringup_dir, "launch", "rviz_launch.py")
+        ),
+        launch_arguments={
+            "rviz_config": os.path.join(
+                tiago_2dnav_dir, "config", "rviz", "navigation.rviz"
+            ),
+        }.items(),
+    )
+
     ld = LaunchDescription()
 
-    # Remappings
-    scan_remap = SetRemap(src='scan', dst='scan_raw')
-    ld.add_action(scan_remap)
-
-    ld.add_action(rviz_arg)
-    ld.add_action(sim_time_arg)
-    ld.add_action(nav2)
+    ld.add_action(nav2_bringup_launch)
+    ld.add_action(rviz_bringup_launch)
 
     return ld
