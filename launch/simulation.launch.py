@@ -136,6 +136,15 @@ def generate_launch_description():
                     'launch'), '/view_bookstore.launch.py']),
             )
 
+    # Specific path for plasys worlds
+    if "plasys" in world_name:
+        # Default: home
+        gazebo = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([os.path.join(
+                get_package_share_directory('plasys_worlds'),
+                'launch'), '/view_home.launch.py']),
+        )
+
     tiago_state_publisher = include_launch_py_description(
         'tiago_description',
         ['launch', 'robot_state_publisher.launch.py'])

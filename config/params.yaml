@@ -11,7 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+#
+# Humbly modifired in 2024 by;
+#  - Ioana Carmen Pasca
+#  - Alba Cruz Rodríguez
+#  - Diego García Currás
+#  - Rebeca Sánchez Denegri
+#
 # PAL Gazebo worlds:
 #
 # aruco             door_obstacle      memmo_simple           pick                        stairs
@@ -28,7 +34,7 @@
 # dock_station      low_sun_empty      pick_place_demo        socmcs
 #
 # Recommended position - x:  0.0 - y:   0.0  - z: 0.0 - roll: 0.0 - pitch: 0.0 - yaw:  0.0
-
+#
 # AWS worlds and recommended positions:
 #
 # aws_house     - x:  0.0 - y:   0.0  - z: 0.0 - roll: 0.0 - pitch: 0.0 - yaw:  0.0
@@ -36,17 +42,21 @@
 # aws_warehouse - x:  0.0 - y:   0.0  - z: 0.1 - roll: 0.0 - pitch: 0.0 - yaw:  0.0
 # aws_hospital  - x:  0.0 - y:   1.0  - z: 0.0 - roll: 0.0 - pitch: 0.0 - yaw: 1.58
 # aws_racetrack - x: 2.75 - y: -15.0  - z: 0.2 - roll: 0.0 - pitch: 0.0 - yaw:  0.0
-
+#
+# plasys worlds and recommended positions:
+#
+# plasys_home     - x:  -4.5 - y:  -3.5  - z: 0.0 - roll: 0.0 - pitch: 0.0 - yaw: 2.35619
+#
 # Options:
 # Tiago arm: no-arm - tiago-arm
 
 tiago_simulator:
-  world: aws_house
+  world: plasys_home
   robot_position:
-    x: 0.0
-    y: 0.0
+    x: -4.5
+    y: -3.5
     z: 0.0
     roll: 0.0
     pitch: 0.0
-    yaw: 0.0
+    yaw: 2.35619
   tiago_arm: no-arm
