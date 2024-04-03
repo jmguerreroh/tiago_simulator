@@ -77,6 +77,14 @@ Copyright &copy; 2024.
 
 [![Twitter](https://img.shields.io/badge/follow-@jm__guerrero-green.svg)](https://twitter.com/jm__guerrero)
 
+Humbly modified in 2024 by:
+
+- [Ioana Carmen]
+- [Alba Cruz]
+- [Diego García]
+- [Rebeca Sánchez]
+
+
 ## License
 
 Shield: 
@@ -92,6 +100,9 @@ This work is licensed under a
 [cc-by-sa-image]: https://licensebuttons.net/l/by-sa/4.0/88x31.png
 [cc-by-sa-shield]: https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg
 
-
 [Universidad Rey Juan Carlos]: https://www.urjc.es/
 [José Miguel Guerrero]: https://sites.google.com/view/jmguerrero
+[Ioana Carmen]: ic.pasca.2021@alumnos.urjc.es
+[Alba Cruz]: a.cruzr.2021@alumnos.urjc.es
+[Diego García]: d.garciac.2021@alumnos.urjc.es
+[Rebeca Sánchez]: r.sanchezd.2021@alumnos.urjc.es

@@ -5,6 +5,10 @@
   <version>2.1.0</version>
   <description>Tiago Simulator</description>
   <maintainer email="josemiguel.guerrero@urjc.es">Jose Miguel Guerrero</maintainer>
+  <maintainer email="ic.pasca.2021@alumnos.urjc.es">Ioana Carmen Pasca</maintainer>
+  <maintainer email="a.cruzr.2021@alumnos.urjc.es">Alba Cruz Rodríguez</maintainer>
+  <maintainer email="d.garciac.2021@alumnos.urjc.es">Diego García Currás</maintainer>
+  <maintainer email="r.sanchezd.2021@alumnos.urjc.es">Rebeca Sánchez Denegri</maintainer>
   <license>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</license>
   <buildtool_depend>ament_cmake</buildtool_depend>
 
