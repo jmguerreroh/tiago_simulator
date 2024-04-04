@@ -2,7 +2,7 @@
 
 ![distro](https://img.shields.io/badge/Ubuntu%2022-Jammy%20Jellyfish-green)
 ![distro](https://img.shields.io/badge/ROS2-Humble-blue)
-[![humble](https://github.com/dgarcu/tiago_simulator/actions/workflows/master.yaml/badge.svg?branch=humble)](https://github.com/dgarcu/tiago_simulator/actions/workflows/master.yaml)
+[![humble](https://github.com/jmguerreroh/tiago_simulator/actions/workflows/master.yaml/badge.svg?branch=humble)](https://github.com/jmguerreroh/tiago_simulator/actions/workflows/master.yaml)
 
 This package allows running different Gazebo worlds, including the [AWS Robomaker](https://github.com/aws-robotics) and **plasys** worlds, using the Tiago robot from [PAL Robotics](https://github.com/pal-robotics)
 
