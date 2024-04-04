@@ -55,19 +55,22 @@ ros2 launch tiago_simulator simulation.launch.py
 To change the Gazebo world or the initial position/rotation of the Tiago robot, you can modify the `config/params.yaml` file.
 
 If you have a low performance and you have installed the NVIDIA driver, you can use your GPU by selecting the NVIDIA PRIME profile:
+
 ```bash
 sudo prime-select nvidia
 ```
 
-Otherwise, you can close the Gazebo client:
+Otherwise, you can close the Gazebo client:ç
+
 ```bash
 pkill -f gzclient
-``` 
+```
 
 Also, you can use [Nav2](https://navigation.ros.org/) with the robot in the world selected in `config/params.yaml`:
+
 ```bash
 ros2 launch tiago_simulator navigation.launch.py
-``` 
+```
 
 ## About
 
@@ -79,15 +82,14 @@ Copyright &copy; 2024.
 
 Humbly modified in 2024 by:
 
-- [Ioana Carmen]
-- [Alba Cruz]
-- [Diego García]
-- [Rebeca Sánchez]
-
+- [Ioana Carmen] | [📧](ic.pasca.2021@alumnos.urjc.es)
+- [Alba Cruz] | [📧](a.cruzr.2021@alumnos.urjc.es)
+- [Diego García] | [📧](d.garciac.2021@alumnos.urjc.es)
+- [Rebeca Sánchez] | [📧](r.sanchezd.2021@alumnos.urjc.es)
 
 ## License
 
-Shield: 
+Shield:
 
 [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
 
@@ -102,7 +104,7 @@ This work is licensed under a
 
 [Universidad Rey Juan Carlos]: https://www.urjc.es/
 [José Miguel Guerrero]: https://sites.google.com/view/jmguerrero
-[Ioana Carmen]: ic.pasca.2021@alumnos.urjc.es
-[Alba Cruz]: a.cruzr.2021@alumnos.urjc.es
-[Diego García]: d.garciac.2021@alumnos.urjc.es
-[Rebeca Sánchez]: r.sanchezd.2021@alumnos.urjc.es
+[Ioana Carmen]: https://github.com/ioana-pasca
+[Alba Cruz]: https://github.com/acruzr2021
+[Diego García]: https://github.com/dgarcu
+[Rebeca Sánchez]: https://github.com/rsanchez2021
