@@ -45,13 +45,13 @@
 #
 # plasys worlds and recommended positions:
 #
-# plasys_home     - x:  -4.5 - y:  -3.5  - z: 0.0 - roll: 0.0 - pitch: 0.0 - yaw: 2.35619
+# plasys_house  - x: -4.5 - y:  -3.5  - z: 0.0 - roll: 0.0 - pitch: 0.0 - yaw: 2.35619
 #
 # Options:
 # Tiago arm: no-arm - tiago-arm
 
 tiago_simulator:
-  world: plasys_home
+  world: plasys_house
   robot_position:
     x: -4.5
     y: -3.5

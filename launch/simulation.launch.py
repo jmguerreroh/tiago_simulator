@@ -138,11 +138,11 @@ def generate_launch_description():
 
     # Specific path for plasys worlds
     if "plasys" in world_name:
-        # Default: home
+        # Default: house
         gazebo = IncludeLaunchDescription(
             PythonLaunchDescriptionSource([os.path.join(
-                get_package_share_directory('plasys_worlds'),
-                'launch'), '/view_home.launch.py']),
+                get_package_share_directory('plasys_house_world'),
+                'launch'), '/view_house.launch.py']),
         )
 
     tiago_state_publisher = include_launch_py_description(
