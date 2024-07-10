@@ -1,10 +1,10 @@
-# Tiago Simulator
+# TIAGo Simulator
 
 ![distro](https://img.shields.io/badge/Ubuntu%2022-Jammy%20Jellyfish-green)
 ![distro](https://img.shields.io/badge/ROS2-Humble-blue)
 [![humble](https://github.com/jmguerreroh/tiago_simulator/actions/workflows/master.yaml/badge.svg?branch=humble)](https://github.com/jmguerreroh/tiago_simulator/actions/workflows/master.yaml)
 
-This package allows running different Gazebo worlds, including the [AWS Robomaker](https://github.com/aws-robotics) worlds, using the Tiago robot from [PAL Robotics](https://github.com/pal-robotics)
+This package allows running different Gazebo worlds, including the [AWS Robomaker](https://github.com/aws-robotics) worlds, using the TIAGo robot from [PAL Robotics](https://github.com/pal-robotics)
 
 ** In the event of communication difficulties, please consider switching the DDS. Recommended: use [Eclipse Cyclone DDS](https://docs.ros.org/en/foxy/Installation/DDS-Implementations/Working-with-Eclipse-CycloneDDS.html). 
 You can do this by installing it with `sudo apt install ros-humble-rmw-cyclonedds-cpp` and setting the `RMW_IMPLEMENTATION` environment variable: `export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp`. Add it to your `.bashrc`**
@@ -47,12 +47,12 @@ source /usr/share/gazebo/setup.bash
 source <ros2-workspace>/install/setup.bash
 ``` 
 
-# Run Gazebo & Tiago in ROS 2
+# Run Gazebo & TIAGo in ROS 2
 ```bash
 ros2 launch tiago_simulator simulation.launch.py
 ``` 
 
-To change the Gazebo world or the initial position/rotation of the Tiago robot, you can modify the `config/params.yaml` file.
+To change the Gazebo world or the initial position/rotation of the TIAGo robot, you can modify the `config/params.yaml` file.
 
 If you have a low performance and you have installed the NVIDIA driver, you can use your GPU by selecting the NVIDIA PRIME profile:
 ```bash
